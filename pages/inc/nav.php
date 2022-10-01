@@ -7,7 +7,7 @@
                     <a class="nav-link" aria-current="page" href="../categories/index.php">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Products</a>
+                    <a class="nav-link" aria-current="page" href="../products/index.php">Products</a>
                 </li>
             </ul>
         </div>

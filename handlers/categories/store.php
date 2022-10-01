@@ -11,8 +11,8 @@ if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     $errors = [];
 
     // Form Inputs
-    $name           = htmlspecialchars(trim($_POST['name'])) ?? "";
-    $description    = htmlspecialchars(trim($_POST['description'])) ?? "";
+    $name           = trim(htmlspecialchars(htmlentities($_POST['name']))) ?? "";
+    $description    = trim(htmlspecialchars(htmlentities($_POST['description']))) ?? "";
 
     // Begin Validation
     if(empty($name)) {
