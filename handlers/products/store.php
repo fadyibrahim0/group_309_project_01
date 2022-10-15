@@ -13,9 +13,17 @@ if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     // Form Inputs
     $name           = trim(htmlspecialchars(htmlentities($_POST['name']))) ?? "";
     $price          = trim(htmlspecialchars(htmlentities($_POST['price']))) ?? "";
-    $category       = $_POST['category_id'];
+    $category_id       = $_POST['category_id'];
 
     // Task check for category if exists in our database or not:
+    $query = "SELECT * FROM `categories` WHERE `id` = '$category_id'";
+    $result = mysqli_query($conn, $query);
+    $category = mysqli_fetch_assoc($result);
+
+    if(!mysqli_num_rows($result) >= 1) {
+        $errors[] = "There's no category id matched in our records";
+    }
+
 
     // Product Image
     $imgName    = $_FILES['image']['name'];
@@ -45,7 +53,7 @@ if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     if(!in_array($imgEXT, $allowedEXT)) $errors[] = "This Extension isn't allowed!";
     if($imgSize > 5242880) $errors[] = "Image Size Should be less than 5MB";
 
-    if(empty($category)) $errors[] = "Category Field is Required!";
+    if(empty($category_id)) $errors[] = "Category Field is Required!";
     // End Validation
 
 
@@ -55,7 +63,7 @@ if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST") {
         move_uploaded_file($imgTmp, "../../uploads/images/products/" . $img);
 
         $query = "INSERT INTO `products` (`name`, `price`, `image`, `category_id`)
-                VALUES ('$name', '$price', '$img', '$category')";
+                VALUES ('$name', '$price', '$img', '$category_id')";
         $result = mysqli_query($conn, $query);
         $affectedRows = mysqli_affected_rows($conn);
 
