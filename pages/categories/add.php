@@ -1,6 +1,6 @@
 <?php require_once '../inc/header.php'; ?>
 <?php require_once '../../core/connection.php'; ?>
-<?php session_start() ?>
+<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
 <h1 class="text-center my-5">Add Category</h1>
 

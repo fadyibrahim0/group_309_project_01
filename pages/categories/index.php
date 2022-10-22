@@ -1,6 +1,7 @@
-<?php require_once '../inc/header.php'; ?>
-<?php require_once '../../core/connection.php'; ?>
-<?php session_start(); ?>
+<?php require_once '../../core/config.php'; ?>
+<?php require_once PATH . 'pages/inc/header.php'; ?>
+<?php require_once PATH . 'core/connection.php'; ?>
+<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
 <?php
 
@@ -14,7 +15,7 @@ $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 <a href="add.php" class="btn btn-primary my-4">Add New Category</a>
 
-<?php require_once '../inc/messages.php'; ?>
+<?php require_once PATH . 'pages/inc/messages.php'; ?>
 
 <table class="table">
     <thead>
@@ -35,10 +36,10 @@ $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <td><?= $category['name'] ?></td>
             <td><?= $category['description'] ?></td>
             <td>
-                <a href="../../handlers/categories/delete.php?id=<?= $category['id'] ?>" class="btn btn-danger">
+                <a href="<?= URL . "handlers/categories/delete.php?id=" . $category['id'] ?>" class="btn btn-danger">
                     Delete
                 </a>
-                <a href="edit.php?id=<?= $category['id'] ?>" class="btn btn-secondary">
+                <a href="<?= URL . "pages/categories/edit.php?id=" . $category['id'] ?>" class="btn btn-secondary">
                     Edit
                 </a>
             </td>
@@ -49,4 +50,4 @@ $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </tbody>
 </table>
 
-<?php require_once '../inc/footer.php'; ?>
+<?php require_once PATH . 'pages/inc/footer.php'; ?>

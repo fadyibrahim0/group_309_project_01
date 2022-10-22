@@ -1,7 +1,6 @@
 <?php 
 
 require_once '../../core/connection.php';
-require_once '../../core/helper.php';
 
 session_start();
 

@@ -1,8 +1,9 @@
 <?php
 
-require_once '../../core/connection.php';
-require_once '../../core/Validation.php';
-require_once '../../core/helper.php';
+require_once '../../core/config.php';
+require_once PATH . 'core/functions.php';
+require_once PATH . 'core/connection.php';
+require_once PATH . 'core/Validation.php';
 
 session_start();
 
@@ -25,17 +26,14 @@ if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST") {
 
         if($affectedRows >= 1) {
             $_SESSION['success'] = "Category Inserted Successfully";
-            header("Location: ../../pages/categories/index.php");
-            exit;
+            redirect(URL . "pages/categories/index.php");
         }
     } else {
         $_SESSION['errors'] = $validationObj->getErrors();
-        header("Location: ../../pages/categories/add.php");
-        exit;
+        redirect(URL . "pages/categories/add.php");
     }
     
 
 } else {
-    header("Location: ../../pages/categories/index.php");
-    exit;
+    redirect(URL . "pages/categories/index.php");
 }
